@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/','DatatablesController@getIndex')->name('datatables');
+Route::get('/getData','DatatablesController@anyData')->name('datatables.data');
+
+Route::get('/admin', function () {
+    return view('admin_template');
 });
