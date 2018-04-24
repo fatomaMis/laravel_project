@@ -17,7 +17,7 @@ class CreateRoomTable extends Migration
             $table->increments('id');
             $table->integer('number')->unique();
             $table->integer('capacity');
-            $table->numeric('price'); //int , float
+            $table->integer('price'); //int , float
             $table->tinyInteger('floor_id'); 
             $table->boolean('is_admin'); 
             $table->tinyInteger('manager_id'); 

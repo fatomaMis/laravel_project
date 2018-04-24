@@ -17,3 +17,19 @@ Route::get('/getData','DatatablesController@anyData')->name('datatables.data');
 Route::get('/admin', function () {
     return view('admin_template');
 });
+
+Route::get('managers','managersController@getIndex')->name('managers');
+Route::get('/getManager','managersController@anyData')->name('managers.data');
+
+
+//crud operations
+Route::get('managers/create','managersController@create')->name('managers.create');
+Route::get('managers/show/{id}','managersController@show')->name('managers.show');
+
+Route::post('managers','managersController@store')->name('managers.store');
+
+Route::get('managers/{id}/edit','managersController@edit')->name('managers.edit');
+Route::post('managers/{id}/update', 'managersController@update')->name('managers.update');
+
+Route::delete('managers/{post}','managersController@destroy');
+

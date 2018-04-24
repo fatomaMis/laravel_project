@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->tinyInteger('manage_receptionist'); //id of manager 1,5,8....
-            $table->string('image')->default('../public/img/avatar.jpg');
+            $table->tinyInteger('receptionist_client'); 
+            $table->string('image')->default('img/avatar.jpg');
             $table->string('mobile');
             $table->string('country');
             $table->string('gender');
