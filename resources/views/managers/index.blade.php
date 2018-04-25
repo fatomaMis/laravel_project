@@ -81,6 +81,7 @@
     <table class="table table-bordered" id="managers-table">
         <thead>
             <tr>
+            
                 <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -108,7 +109,7 @@ $(function() {
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email'},
             { data: 'image', name: 'image',
-            render: function( data) {
+            render: function(data) {
                 return "<center><img src=\"" + data + "\" height=\"70\"/></center>";
         }
             },
@@ -146,17 +147,53 @@ $(function() {
              
             {data: 'action', name: 'action', orderable: false, searchable: false,
                 render: function (data, type, row) {
+                  var count = {{count($manager)}};
+                  var id = row['id'];
+                  var url = '{{ route("managers.show", ":id") }}';
+                  url = url.replace(':id', row['id']);
 
-                    var linkView='<a href = "{{route('managers.show',123)}}" class="editor_preview btn btn-success btn-sm glyphicon glyphicon-th-list" data-id="' + row["id"] + '">VIEW</a>';
-                    var linkEdit='<a href="{{url('')}}" class="btn btn-warning btn-sm glyphicon glyphicon-edit" data-id="' + row['id'] + '">EDIT</a>';
-                    var linkDelete='<a href="{{url('')}}" class="editor_remove btn btn-danger btn-sm glyphicon glyphicon-trash" data-id="' + row["id"] + '">DELETE</a>';
+                  var editurl = '{{ route("managers.edit", ":id") }}';
+                  editurl = editurl.replace(':id', row['id']);
+                  
+                    var linkView='<a href = "'+url+'" class="editor_preview btn btn-success btn-sm glyphicon glyphicon-th-list" data-id="' + row["id"] + '">VIEW</a>';
+                    var linkEdit='<a href= "'+editurl+'" class="btn btn-warning btn-sm glyphicon glyphicon-edit" data-id="' + row['id'] + '">EDIT</a>';
+                    var linkDelete='<button onclick="myFunction('+row['id']+')" class="deleteProduct btn btn-danger btn-sm glyphicon glyphicon-trash" data-id="' + row["id"] + '">DELETE</button>';
                     
-                    return  linkView + "  " + linkEdit + "  " + linkDelete;
+                    return  linkView +' '+ linkEdit +' '+ linkDelete;
                 }
             },
         ]
     });
 });
+function myFunction(id){
+  var check = confirm("are you sure")
+  if (check == true){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+    {
+        url: "/managers/"+id,
+        type: 'delete',
+        dataType: "JSON",
+        data: {
+            "id": id 
+        },
+        success: function (response)
+        {
+    
+          var table = $('#managers-table').DataTable();
+          table.row( $(this).parents('tr') ).remove().draw();
+            console.log(response);
+        },
+        error: function(xhr) {
+         console.log(xhr.responseText);
+       }
+    });
+}
+};
 </script>
 @endpush
 

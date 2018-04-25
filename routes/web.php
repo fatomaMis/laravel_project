@@ -19,16 +19,16 @@ Route::get('/admin', function () {
 });
 
 Route::get('managers','managersController@getIndex')->name('managers');
-Route::get('/getManager','managersController@Data')->name('managers.data');
+Route::get('/getManager','managersController@anyData')->name('managers.data');
 
 //crud operations
+Route::get('managers/{id}/edit','managersController@edit')->name('managers.edit');
+Route::post('managers/{id}/update', 'managersController@update')->name('managers.update');
+
 Route::get('managers/create','managersController@create')->name('managers.create');
 Route::get('managers/show/{id}','managersController@show')->name('managers.show');
 
 Route::post('managers','managersController@store')->name('managers.store');
 
-Route::get('managers/{id}/edit','managersController@edit')->name('managers.edit');
-Route::post('managers/{id}/update', 'managersController@update')->name('managers.update');
-
-Route::delete('managers/{post}','managersController@destroy');
+Route::delete('managers/{id}','managersController@destroy');
 
