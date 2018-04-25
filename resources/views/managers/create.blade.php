@@ -30,7 +30,7 @@
             </tr>
             <tr>
             <td>Password</td>
-            <td><input type="text" name="password"></td>
+            <td><input type="password" name="password"></td>
             </tr>
             <tr>
             <td>Image</td>
@@ -43,11 +43,18 @@
             </tr>
             <tr>
             <td>Country</td>
-            <td><input type="text" name="country"></td>
+            <td>
+            <select class="form-control" name="country">
+            @for ($i = 0; $i <= count($countries)-1; $i++)
+            <option>{{$countries[$keys[$i]]["name"]}}</option>
+            @endfor</select></td>
             </tr>
             <tr>
             <td>Gender</td>
-            <td><input type="text" name="gender"></td>
+            <td><select class="form-control" name="gender">
+    <option value="female">female</option>
+    <option value="male">male</option>
+</select></td>
             </tr>
     </table>
 <input type="submit" value="Submit" class="btn btn-primary">

@@ -19,8 +19,7 @@ Route::get('/admin', function () {
 });
 
 Route::get('managers','managersController@getIndex')->name('managers');
-Route::get('/getManager','managersController@anyData')->name('managers.data');
-
+Route::get('/getManager','managersController@Data')->name('managers.data');
 
 //crud operations
 Route::get('managers/create','managersController@create')->name('managers.create');

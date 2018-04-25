@@ -17,6 +17,7 @@ class ComposerStaticInit73cd042fc805a8395b2c40b0e788333e
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        'fe593da70c286f8784bd16ab92f381f1' => __DIR__ . '/..' . '/rinvex/country/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
     );
@@ -63,6 +64,7 @@ class ComposerStaticInit73cd042fc805a8395b2c40b0e788333e
         ),
         'R' => 
         array (
+            'Rinvex\\Country\\' => 15,
             'Ramsey\\Uuid\\' => 12,
         ),
         'P' => 
@@ -206,6 +208,10 @@ class ComposerStaticInit73cd042fc805a8395b2c40b0e788333e
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
         ),
+        'Rinvex\\Country\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rinvex/country/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -348,12 +354,14 @@ class ComposerStaticInit73cd042fc805a8395b2c40b0e788333e
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DatatablesController' => __DIR__ . '/../..' . '/app/Http/Controllers/DatatablesController.php',
+        'App\\Http\\Controllers\\managersController' => __DIR__ . '/../..' . '/app/Http/Controllers/managersController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\StoreBlogUser' => __DIR__ . '/../..' . '/app/Http/Requests/StoreBlogUser.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -2939,6 +2947,9 @@ class ComposerStaticInit73cd042fc805a8395b2c40b0e788333e
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
+        'Rinvex\\Country\\Country' => __DIR__ . '/..' . '/rinvex/country/src/Country.php',
+        'Rinvex\\Country\\CountryLoader' => __DIR__ . '/..' . '/rinvex/country/src/CountryLoader.php',
+        'Rinvex\\Country\\CountryLoaderException' => __DIR__ . '/..' . '/rinvex/country/src/CountryLoaderException.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

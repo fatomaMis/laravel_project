@@ -106,7 +106,7 @@ $(function() {
         columns: [
             { data: 'id', name: 'id' },
             { data: 'name', name: 'name' },
-            { data: 'email', name: 'email' },
+            { data: 'email', name: 'email'},
             { data: 'image', name: 'image',
             render: function( data) {
                 return "<center><img src=\"" + data + "\" height=\"70\"/></center>";
@@ -134,7 +134,7 @@ $(function() {
                     if(!data){
                         return "not updated";
                     }
-                    var dateOb = new Date(data);
+                    var dateObj = new Date(data);
                     var month = dateObj.getUTCMonth() + 1; 
                     var day = dateObj.getUTCDate();
                     var year = dateObj.getUTCFullYear();
@@ -146,8 +146,8 @@ $(function() {
              
             {data: 'action', name: 'action', orderable: false, searchable: false,
                 render: function (data, type, row) {
-                    
-                    var linkView='<a href="{{url('')}}" class="editor_preview btn btn-success btn-sm glyphicon glyphicon-th-list" data-id="' + row["id"] + '">VIEW</a>';
+
+                    var linkView='<a href = "{{route('managers.show',123)}}" class="editor_preview btn btn-success btn-sm glyphicon glyphicon-th-list" data-id="' + row["id"] + '">VIEW</a>';
                     var linkEdit='<a href="{{url('')}}" class="btn btn-warning btn-sm glyphicon glyphicon-edit" data-id="' + row['id'] + '">EDIT</a>';
                     var linkDelete='<a href="{{url('')}}" class="editor_remove btn btn-danger btn-sm glyphicon glyphicon-trash" data-id="' + row["id"] + '">DELETE</a>';
                     

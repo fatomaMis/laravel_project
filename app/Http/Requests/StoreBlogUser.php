@@ -25,9 +25,10 @@ class StoreBlogUser extends FormRequest
     {
         return [
             'password' => 'required|min:6',
-            'id' => 'unique:users,id',
-            'email' => 'unique:users,email',
-            'image' => 'image|mimes:jpeg,jpg'
+            'name' => 'required',
+            'id' => 'required|unique:users,id',
+            'email' => 'required|unique:users,email',
+            'image' => 'image|mimes:jpg,jpeg'
             ];
     }
 }
