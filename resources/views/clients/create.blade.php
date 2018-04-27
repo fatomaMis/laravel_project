@@ -13,7 +13,7 @@
 
 <div class="container">
 <div class="table-wrapper"> 
-<form class="form-horizontal" method="post" action="/managers" enctype="multipart/form-data">
+<form class="form-horizontal" method="post" action="/index.php/clients/store" enctype="multipart/form-data">
 {{csrf_field()}}
 <table class="table table-bordered" id="managers-table">
             <tr>

@@ -54,9 +54,9 @@ Route::get('clients/{id}/edit','clientsController@edit')->name('clients.edit');
 Route::post('clients/{id}/update', 'clientsController@update')->name('clients.update');
 
 Route::get('clients/create','clientsController@create')->name('clients.create');
-Route::get('clients/show/{id}','clientsController@show')->name('clients.show');
+Route::get('clients/show','clientsController@show')->name('clients.show');
 
-Route::post('clients','clientsController@store')->name('clients.store');
+Route::post('clients/store','clientsController@store')->name('clients.store');
 
 Route::delete('clients/{id}','clientsController@destroy');
 

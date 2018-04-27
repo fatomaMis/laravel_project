@@ -12,8 +12,10 @@ use App\Http\Requests\StoreBlogUser;
 use \Rinvex\Country\CountryLoader;
 use Illuminate\Support\Facades\Input;
 use Storage;
+use Session;
 
-class receptionistsController extends Controller
+
+class clientsController extends Controller
 {
     
     /**
@@ -60,8 +62,7 @@ class receptionistsController extends Controller
         $keys = array_keys($countries);
         $receptionists=User::all();
         
-        return view('receptionists.create',[
-            'receptionists'=>$receptionists,
+        return view('clients.create',[
             'countries'=>$countries,
             'keys'=>$keys,
         ]);
@@ -80,36 +81,38 @@ class receptionistsController extends Controller
         $destinationPath = 'img/'.$fileName;
         $file->move(public_path().'/img/',$fileName);
         }
-        User::create([
+        Client::create([
             'id' => $request->id,
             'name' => $request->name,
             'type' => "3",
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => md5($request->password),
             'image' => $destinationPath,
             'mobile' => $request->mobile,
             'country' => $request->country,
             'gender' => $request->gender
         ]);
-       return redirect(route('receptionists.store')); 
+        
+        $userSession=[
+            'name'=>$request->name,
+            'type'=>'3',
+            'email'=>$request->email,
+            'image'=>$request->image,
+            'mobile'=>$request->mobile,
+            'country'=>$request->country,
+            'gender'=>$request->gender,
+        ];
+
+        $request->session()->put('loggedInUser', $userSession);
+       return redirect(route('clients.show')); 
 }
 
-public function show($id){
-    $receptionists = User::all();
-    $client_id = [];
-    $array = [];
-    $clients = $receptionists->where('receptionist_client' ,'=', $id)
-    ->where('type', '=', 4);
-    foreach ($clients as $client){
-       $client_id[] = $client->id;
-    }
-
-    foreach ($client_id as $cl_id){
-        $client = User::find($cl_id);
-        $array[] = $client;
-     }
-    return view('receptionists.show', ['receptionist' => User::findOrFail($id),
-                                   'client' => $array
+public function show(){
+    //add validation here
+    $clientData=Session::get('loggedInUser');
+    
+    return view('clients.show', ['clientData' =>$clientData,
+                                   
     ]); 
 }
 public function destroy($id)
