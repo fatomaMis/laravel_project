@@ -96,6 +96,14 @@ public function show($id){
                                    'receptionist' => $array
     ]); 
 }
+
+public function stat()
+{
+    //stat here
+    return view('managers.stat',[
+            // 'manager' => $managers
+        ]);
+}
 public function destroy($id)
 {
 

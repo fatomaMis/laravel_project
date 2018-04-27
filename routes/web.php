@@ -59,3 +59,6 @@ Route::get('clients/show/{id}','clientsController@show')->name('clients.show');
 Route::post('clients','clientsController@store')->name('clients.store');
 
 Route::delete('clients/{id}','clientsController@destroy');
+
+//statistics
+Route::get('/stat','managersController@stat')->name('managers.stat');
