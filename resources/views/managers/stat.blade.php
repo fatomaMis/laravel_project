@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <div id="piechart" style="width: 900px; height: 500px;"></div>
       <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
@@ -24,14 +25,13 @@
     google.charts.setOnLoadCallback(drawPieChartOfTopten);
     google.charts.setOnLoadCallback(drawPieChartOfReservs);
 
-    function drawPieChartOfGenders() {
-      var statGenderObj=getStatGenderObj()
-
+    async function drawPieChartOfGenders() {
+      var statGenderObj=await getStatGenderObj();
       var tableData=[
           ['Gender', 'Numbers'],
           ['Male',     statGenderObj.malesNo],
           ['Female',      statGenderObj.femalesNo],
-        ]
+        ];
       var data = google.visualization.arrayToDataTable(tableData);
 
       var options = {
@@ -43,14 +43,13 @@
       chart.draw(data, options);
     }
 
-    function getStatGenderObj()
+    async function getStatGenderObj()
     {
-      ///make ajax request here
-
-      return {
-        malesNo:8,
-        femalesNo:11
-      }
+      var statGenderObj={}
+      await $.get("/index.php/api/clients/getGenderStat", function(data){
+        statGenderObj=JSON.parse(data);
+      });
+      return statGenderObj;
     }
       ///Pie Chart End
 

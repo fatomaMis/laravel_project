@@ -193,5 +193,18 @@ public function update(Request  $request,$id)
     ]);
     return redirect(route('receptionists'));
 }
+
+public function getGenderStat()
+{
+    $allFemaleClients=Client::where('gender','female')->get();
+    $allmaleClients=Client::where('gender','male')->get();
+    $genderStatJson=json_encode([
+        'malesNo'=>count($allmaleClients),
+        'femalesNo'=>count($allFemaleClients)
+    ]); 
+    return $genderStatJson;
+    
+}
+
 }
  
