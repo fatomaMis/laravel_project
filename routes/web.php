@@ -19,16 +19,43 @@ Route::get('/admin', function () {
 });
 
 Route::get('managers','managersController@getIndex')->name('managers');
-Route::get('/getManager','managersController@Data')->name('managers.data');
+Route::get('/getManager','managersController@anyData')->name('managers.data');
 
 //crud operations
+Route::get('managers/{id}/edit','managersController@edit')->name('managers.edit');
+Route::post('managers/{id}/update', 'managersController@update')->name('managers.update');
+
 Route::get('managers/create','managersController@create')->name('managers.create');
 Route::get('managers/show/{id}','managersController@show')->name('managers.show');
 
 Route::post('managers','managersController@store')->name('managers.store');
 
-Route::get('managers/{id}/edit','managersController@edit')->name('managers.edit');
-Route::post('managers/{id}/update', 'managersController@update')->name('managers.update');
+Route::delete('managers/{id}','managersController@destroy');
 
-Route::delete('managers/{post}','managersController@destroy');
+//crud operations of admin receptionists 
+Route::get('receptionists','receptionistsController@getIndex')->name('receptionists');
+Route::get('/getReceptionists','receptionistsController@anyData')->name('receptionists.data');
 
+Route::get('receptionists/{id}/edit','receptionistsController@edit')->name('receptionists.edit');
+Route::post('receptionists/{id}/update', 'receptionistsController@update')->name('receptionists.update');
+
+Route::get('receptionists/create','receptionistsController@create')->name('receptionists.create');
+Route::get('receptionists/show/{id}','receptionistsController@show')->name('receptionists.show');
+
+Route::post('receptionists','receptionistsController@store')->name('receptionists.store');
+
+Route::delete('receptionists/{id}','receptionistsController@destroy');
+
+//crud operations of admin clients 
+Route::get('clients','clientsController@getIndex')->name('clients');
+Route::get('/getClients','clientsController@anyData')->name('clients.data');
+
+Route::get('clients/{id}/edit','clientsController@edit')->name('clients.edit');
+Route::post('clients/{id}/update', 'clientsController@update')->name('clients.update');
+
+Route::get('clients/create','clientsController@create')->name('clients.create');
+Route::get('clients/show/{id}','clientsController@show')->name('clients.show');
+
+Route::post('clients','clientsController@store')->name('clients.store');
+
+Route::delete('clients/{id}','clientsController@destroy');
