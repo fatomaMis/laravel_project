@@ -20,7 +20,7 @@ class managersController extends Controller
      */
     public function getIndex()
     { 
-        $managers = User::all();
+        $managers =  User::where('type', 2)->get();;
         return view('managers.index',[
             'manager' => $managers
         ]);
@@ -96,9 +96,20 @@ public function show($id){
                                    'receptionist' => $array
     ]); 
 }
+
+public function stat()
+{
+    //stat here
+    return view('managers.stat',[
+            // 'manager' => $managers
+        ]);
+}
 public function destroy($id)
 {
-    User::destroy($id);
+
+    $receptionists_id = User::find($id);
+        $rec_id = $receptionists_id->manage_receptionist;
+        User::whereIn('id', [$id,$rec_id])->delete();
     return response()->json([
         'success' => 'Record has been deleted successfully!'
     ]);
