@@ -1,5 +1,6 @@
 <?php
-
+use App\Mail\welcome;
+use App\Client;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,54 +15,120 @@
 Route::get('/','DatatablesController@getIndex')->name('datatables');
 Route::get('/getData','DatatablesController@anyData')->name('datatables.data');
 
+Route::get('/admin/home','loginController@adminindex')->name('admin.index');
+Route::get('/manage/home','loginController@manageindex')->name('manager.index');
+
+Route::get('/logout','loginController@logout');
+
 Route::get('/admin', function () {
     return view('admin_template');
 });
 
-Route::get('managers','managersController@getIndex')->name('managers');
-Route::get('/getManager','managersController@anyData')->name('managers.data');
+Route::get('/admin/managers','Admin\managersController@getIndex')->name('adminmanagers');
+Route::get('/admin/getManager','Admin\managersController@anyData')->name('adminmanagers.data');
 
 //crud operations
-Route::get('managers/{id}/edit','managersController@edit')->name('managers.edit');
-Route::post('managers/{id}/update', 'managersController@update')->name('managers.update');
+Route::get('/admin/managers/{id}/edit','Admin\managersController@edit')->name('adminmanagers.edit');
+Route::post('/admin/managers/{id}/update', 'Admin\managersController@update')->name('adminmanagers.update');
 
-Route::get('managers/create','managersController@create')->name('managers.create');
-Route::get('managers/show/{id}','managersController@show')->name('managers.show');
+Route::get('/admin/managers/create','Admin\managersController@create')->name('adminmanagers.create');
+Route::get('/admin/managers/show/{id}','Admin\managersController@show')->name('adminmanagers.show');
 
-Route::post('managers','managersController@store')->name('managers.store');
+Route::post('/admin/managers','Admin\managersController@store')->name('adminmanagers.store');
 
-Route::delete('managers/{id}','managersController@destroy');
+Route::delete('/admin/managers/{id}','Admin\managersController@destroy');
 
 //crud operations of admin receptionists 
-Route::get('receptionists','receptionistsController@getIndex')->name('receptionists');
-Route::get('/getReceptionists','receptionistsController@anyData')->name('receptionists.data');
+Route::get('/admin/receptionists','Admin\receptionistsController@getIndex')->name('adminreceptionists');
+Route::get('/admin/getReceptionists','Admin\receptionistsController@anyData')->name('adminreceptionists.data');
 
-Route::get('receptionists/{id}/edit','receptionistsController@edit')->name('receptionists.edit');
-Route::post('receptionists/{id}/update', 'receptionistsController@update')->name('receptionists.update');
+Route::get('/admin/receptionists/{id}/edit','Admin\receptionistsController@edit')->name('adminreceptionists.edit');
+Route::post('/admin/receptionists/{id}/update', 'Admin\receptionistsController@update')->name('adminreceptionists.update');
 
-Route::get('receptionists/create','receptionistsController@create')->name('receptionists.create');
-Route::get('receptionists/show/{id}','receptionistsController@show')->name('receptionists.show');
+Route::get('/admin/receptionists/create','Admin\receptionistsController@create')->name('adminreceptionists.create');
+Route::get('/admin/receptionists/show/{id}','Admin\receptionistsController@show')->name('adminreceptionists.show');
 
-Route::post('receptionists','receptionistsController@store')->name('receptionists.store');
+Route::post('/admin/receptionists','Admin\receptionistsController@store')->name('adminreceptionists.store');
 
-Route::delete('receptionists/{id}','receptionistsController@destroy');
+Route::delete('/admin/receptionists/{id}','Admin\receptionistsController@destroy');
 
 //crud operations of admin clients 
-Route::get('clients','clientsController@getIndex')->name('clients');
-Route::get('/getClients','clientsController@anyData')->name('clients.data');
+Route::get('/admin/clients','Admin\clientsController@getIndex')->name('adminclients');
+Route::get('/admin/getClients','Admin\clientsController@anyData')->name('adminclients.data');
 
-Route::get('clients/{id}/edit','clientsController@edit')->name('clients.edit');
-Route::post('clients/{id}/update', 'clientsController@update')->name('clients.update');
+Route::get('/admin/clients/{id}/edit','Admin\clientsController@edit')->name('adminclients.edit');
+Route::post('/admin/clients/{id}/update', 'Admin\clientsController@update')->name('adminclients.update');
 
-Route::get('clients/create','clientsController@create')->name('clients.create');
-Route::get('clients/login','clientsController@login')->name('clients.login');
-Route::post('clients/loginUser','clientsController@loginUser');
+Route::get('/admin/clients/create','Admin\clientsController@create')->name('adminclients.create');
+Route::post('/admin/clients','Admin\clientsController@store')->name('adminclients.store');
 
-Route::get('clients/show','clientsController@show')->name('clients.show');
+Route::get('/admin/clients/show/{id}','Admin\clientsController@show')->name('adminclients.show');
+Route::delete('/admin/clients/{id}','Admin\clientsController@destroy');
 
-Route::post('clients/store','clientsController@store')->name('clients.store');
+Route::get('register/create','registerController@create')->name('register.create');
+Route::post('/register','registerController@store')->name('register.store');
+
+//login
+Route::get('/login','loginController@login')->name('login');
+Route::post('/login/loginUser','loginController@loginUser');
+
+Route::get('/admin/clients/show','Admin\clientsController@show')->name('admin.clients.show');
+
+
 
 Route::delete('clients/{id}','clientsController@destroy');
 
 //statistics
-Route::get('/stat','managersController@stat')->name('managers.stat');
+Route::get('/stat','Admin\managersController@stat')->name('managers.stat');
+
+//crud operations of manager floor 
+Route::get('/manage/floor','Manage\floorController@getIndex')->name('managefloor');
+Route::get('/manage/getFloor','Manage\floorController@anyData')->name('managefloor.data');
+
+
+Route::get('/manage/floor/{id}/edit','Manage\floorController@edit')->name('managefloor.edit');
+Route::post('/manage/floor/{id}/update', 'Manage\floorController@update')->name('managefloor.update');
+
+Route::get('/manage/floor/create','Manage\floorController@create')->name('managefloor.create');
+Route::post('/manage/floor','Manage\floorController@store')->name('managefloor.store');
+
+Route::get('/manage/floor/show/{id}','Manage\floorController@show')->name('managefloor.show');
+Route::delete('/manage/floor/{id}','Manage\floorController@destroy');
+
+//crud operations of manager room 
+Route::get('/manage/room','Manage\roomController@getIndex')->name('manageroom');
+Route::get('/manage/getRoom','Manage\roomController@anyData')->name('manageroom.data');
+
+Route::get('/manage/room/{id}/edit','Manage\roomController@edit')->name('manageroom.edit');
+Route::post('/manage/room/{id}/update', 'Manage\roomController@update')->name('manageroom.update');
+
+Route::get('/manage/room/create','Manage\roomController@create')->name('manageroom.create');
+Route::post('/manage/room','Manage\roomController@store')->name('manageroom.store');
+
+Route::get('/manage/room/show/{id}','Manage\roomController@show')->name('manageroom.show');
+Route::delete('/manage/room/{id}','Manage\roomController@destroy');
+
+
+//////////////////reception///////////////////
+Route::get('client','MyrecervationsController@index');
+Route::get('allroom','MyrecervationsController@recervation')->name('allroom');
+Route::get('unrecerved','RoomsController@index')->name('unrecerved');
+Route::get('show/{id}','RoomsController@show')->name('showroom');
+Route::post('client/{id}/update','RoomsController@update')->name('updatenumber');
+//////////////////Client//////////////////////
+Route::get('allroom/{id}/edit','ClientsController@edit')->name('editprofile');
+Route::post('allroom/{id}/update','ClientsController@update')->name('updateprofile');
+Route::get('reception','ClientsController@index');
+
+///////////////Email////////////////////
+Route::get('/unapproved', function() {
+
+    $clients =Client::all();
+    $email = new welcome($clients);
+    $when = now()->addSeconds(5);
+    foreach($clients as $client){
+    Mail::to($client->email)->send(($email)->delay($when));
+    }
+    return view('reception.unapproveclient',['clients'=>$clients]);
+    
+});

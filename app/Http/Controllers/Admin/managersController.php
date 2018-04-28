@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use Hash;
-use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Yajra\Datatables\Datatables;
@@ -11,8 +10,9 @@ use App\Http\Requests\StoreBlogUser;
 use \Rinvex\Country\CountryLoader;
 use Illuminate\Support\Facades\Input;
 use Storage;
+use Session;
 
-class receptionistsController extends Controller
+class managersController extends Controller
 {
     
     /**
@@ -22,11 +22,20 @@ class receptionistsController extends Controller
      */
     public function getIndex()
     { 
-        $receptionists = User::where('type', 3)->get();
-        
-        return view('receptionists.index',[
-            'receptionists' => $receptionists
+        $clientData=Session::get('loggedInUser');
+        if($clientData == null){
+            return view('login');
+        }
+        else if($clientData['type']==1){
+        $managers =  User::where('type', 2)->get();;
+        return view('admin.managers.index',[
+            'manager' => $managers,
+            'clientData' =>$clientData,
         ]);
+        }
+        else{
+            return view('login');
+        }
     }
 
     /**
@@ -37,38 +46,29 @@ class receptionistsController extends Controller
     public function anyData()
     {
         //$user=User::query();
-        $receptionists = User::where('type', 3)->get();
-        $i=0;
-        foreach ($receptionists as $receptionist)
-            {
-                $id[$i] = $receptionist->manage_receptionist;
-            }
-           
-        return Datatables::of($receptionists)
-        ->addColumn('action', function ($receptionists) {
-        })
-        ->addColumn('manager', function ($id) {
-            return $id->manage_receptionist;
-        })
-        ->make(true);
+        $user= User::where('type', 2)->get();
+        return Datatables::of($user)->addColumn('action', function ($user) {
+        })->make(true);
     }
 
     public function create(){
+        $clientData=Session::get('loggedInUser');
         $countries = countries();    
         $keys = array_keys($countries);
-        $receptionists=User::all();
+        $managers=User::all();
         
-        return view('receptionists.create',[
-            'receptionists'=>$receptionists,
+        return view('admin.managers.create',[
+            'managers'=>$managers,
             'countries'=>$countries,
             'keys'=>$keys,
+            'clientData' =>$clientData,
         ]);
     }
     
     public function store(StoreBlogUser $request)
     {  
         if($request->image == null){
-            $destinationPath = 'img/avatar.jpg';
+            $destinationPath = '../img/avatar.jpg';
         }
         else{
         $file = $request->file('image');
@@ -81,64 +81,69 @@ class receptionistsController extends Controller
         User::create([
             'id' => $request->id,
             'name' => $request->name,
-            'type' => "3",
+            'type' => "2",
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'image' => $destinationPath,
             'mobile' => $request->mobile,
             'country' => $request->country,
             'gender' => $request->gender
         ]);
-       return redirect(route('receptionists.store')); 
+       return redirect(route('adminmanagers.store')); 
 }
 
 public function show($id){
-    $receptionists = User::all();
-    $client_id = [];
+    $clientData=Session::get('loggedInUser');
+    $managers = User::all();
+    $receptionist_id = [];
     $array = [];
-    $clients = $receptionists->where('receptionist_client' ,'=', $id)
-    ->where('type', '=', 4);
-    foreach ($clients as $client){
-       $client_id[] = $client->id;
+    $receptionists = $managers->where('manage_receptionist' ,'=', $id)
+    ->where('type', '=', 3);
+    foreach ($receptionists as $receptionist){
+       $receptionist_id[] = $receptionist->id;
     }
 
-    foreach ($client_id as $cl_id){
-        $client = User::find($cl_id);
-        $array[] = $client;
+    foreach ($receptionist_id as $rec_id){
+        $receptionist = User::find($rec_id);
+        $array[] = $receptionist;
      }
-    return view('receptionists.show', ['receptionist' => User::findOrFail($id),
-                                   'client' => $array
+    return view('admin.managers.show', ['manager' => User::findOrFail($id),
+                                   'receptionist' => $array,
+                                   'clientData' =>$clientData,
     ]); 
+}
+
+public function stat()
+{
+    //stat here
+    return view('admin.managers.stat',[
+            // 'manager' => $managers
+        ]);
 }
 public function destroy($id)
 {
-    User::destroy($id);
+    $receptionists_id = User::find($id);
+        $rec_id = $receptionists_id->manage_receptionist;
+        User::whereIn('id', [$id,$rec_id])->delete();
     return response()->json([
         'success' => 'Record has been deleted successfully!'
     ]);
 }
 public function edit($id){
-
+    $clientData=Session::get('loggedInUser');
     $countries = countries();    
     $keys = array_keys($countries);
-    $receptionists=User::all();
+    $managers=User::all();
     
-    return view('receptionists.edit',['receptionist'=> User::findOrFail($id),
-    'receptionists'=>$receptionists,
+    return view('admin.managers.edit',['manager'=> User::findOrFail($id),
+    'managers'=>$managers,
     'countries'=>$countries,
     'keys'=>$keys,
+    'clientData' =>$clientData,
     ]);
 }
-public function update(Request  $request,$id)
+public function update(StoreBlogUser $request,$id)
 {
-    $this->validate(request(), [
-        'id' => 'required',
-        'name' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:6',
-        'image' => 'image|mimes:jpg,jpeg'
-    ]);
-    
     if($request->image == null){
         $destinationPath = 'img/avatar.jpg';
     }
@@ -153,15 +158,14 @@ public function update(Request  $request,$id)
     User::where('id',$id)->update([
         'id' => $request->id,
         'name' => $request->name,
-        'type' => "3",
+        'type' => "2",
         'email' => $request->email,
-        'password' => Hash::make($request->password),
+        'password' => $request->password,
         'image' => $destinationPath,
         'mobile' => $request->mobile,
         'country' => $request->country,
         'gender' => $request->gender
     ]);
-    return redirect(route('receptionists'));
+    return redirect(route('adminmanagers'));
 }
 }
- 

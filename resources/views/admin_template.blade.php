@@ -35,22 +35,29 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="{{ route('managers') }}">
+          <a href="{{ route('adminmanagers') }}">
           <span>Manage Managers​</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('adminreceptionists') }}">
           <span>Manage Receptionists</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('adminclients') }}">
           <span>Manage Clients</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="/logout">
+          <span>Logout</span>
             <span class="pull-right-container">
             </span>
           </a>

@@ -15,7 +15,7 @@ class DatatablesController extends Controller
      */
     public function getIndex()
     {
-        return view('client_template');
+        return view('login');
     }
 
     /**

@@ -112,25 +112,6 @@ public function login()
     return view('clients.login'); 
 }
 
-public function loginUser(Request  $request)
-{
-    $email=$request->email;
-    $password=$request->password;
-    $client=Client::where('email',$email)->where('password', md5($password))->firstOrFail();
-    //add validation  here
-    $clientSession=[
-        'name'=>$client->name,
-        'type'=>'3',
-        'email'=>$client->email,
-        'image'=>$client->image,
-        'mobile'=>$client->mobile,
-        'country'=>$client->country,
-        'gender'=>$client->gender,
-    ];
-
-    $request->session()->put('loggedInUser', $clientSession);
-    return redirect(route('clients.show')); 
-}
 
 public function show(){
     //add validation here

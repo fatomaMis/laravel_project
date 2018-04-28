@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Room extends Model
 {
     use Notifiable;
     //
@@ -14,8 +14,19 @@ class Client extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function room(){
+    
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class);
+    }
 
-        return $this->belongsTo('App\Room');
+    public function manager()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function client(){
+        return $this->belongsTo('App\Client');
     }
 }
+ 

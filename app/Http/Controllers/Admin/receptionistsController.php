@@ -1,34 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
 
-use Hash;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use App\Client;
 use Yajra\Datatables\Datatables;
-use App\Http\Requests\StoreBlogUser;
+use App\Http\Requests\StoreBlogFloor;
 use \Rinvex\Country\CountryLoader;
 use Illuminate\Support\Facades\Input;
 use Storage;
-
+use Session;
 class receptionistsController extends Controller
 {
     
-    /**
-     * Displays datatables front end view
-     *
-     * @return \Illuminate\View\View
-     */
     public function getIndex()
     { 
         $receptionists = User::where('type', 3)->get();
-        
-        return view('receptionists.index',[
-            'receptionists' => $receptionists
+        $clientData=Session::get('loggedInUser');
+        if($clientData == null){
+            return view('login');
+        }
+        else if($clientData['type']==1){
+        return view('admin.receptionists.index',[
+            'receptionists' => $receptionists,
+            'clientData' =>$clientData,
         ]);
+        }
+        else{
+            return view('login');
+        }
     }
-
     /**
      * Process datatables ajax request.
      *
@@ -42,6 +46,7 @@ class receptionistsController extends Controller
         foreach ($receptionists as $receptionist)
             {
                 $id[$i] = $receptionist->manage_receptionist;
+                $i++;
             }
            
         return Datatables::of($receptionists)
@@ -53,22 +58,25 @@ class receptionistsController extends Controller
         ->make(true);
     }
 
+
     public function create(){
+        $clientData=Session::get('loggedInUser');
         $countries = countries();    
         $keys = array_keys($countries);
         $receptionists=User::all();
         
-        return view('receptionists.create',[
+        return view('admin.receptionists.create',[
             'receptionists'=>$receptionists,
             'countries'=>$countries,
             'keys'=>$keys,
+            'clientData' =>$clientData,
         ]);
     }
     
-    public function store(StoreBlogUser $request)
+    public function store(Request $request)
     {  
         if($request->image == null){
-            $destinationPath = 'img/avatar.jpg';
+            $destinationPath = '../img/avatar.jpg';
         }
         else{
         $file = $request->file('image');
@@ -83,16 +91,17 @@ class receptionistsController extends Controller
             'name' => $request->name,
             'type' => "3",
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'image' => $destinationPath,
             'mobile' => $request->mobile,
             'country' => $request->country,
             'gender' => $request->gender
         ]);
-       return redirect(route('receptionists.store')); 
+       return redirect(route('adminreceptionists.store')); 
 }
 
 public function show($id){
+    $clientData=Session::get('loggedInUser');
     $receptionists = User::all();
     $client_id = [];
     $array = [];
@@ -106,8 +115,9 @@ public function show($id){
         $client = User::find($cl_id);
         $array[] = $client;
      }
-    return view('receptionists.show', ['receptionist' => User::findOrFail($id),
-                                   'client' => $array
+    return view('admin.receptionists.show', ['receptionist' => User::findOrFail($id),
+                                   'client' => $array,
+                                   'clientData' =>$clientData,
     ]); 
 }
 public function destroy($id)
@@ -118,15 +128,16 @@ public function destroy($id)
     ]);
 }
 public function edit($id){
-
+    $clientData=Session::get('loggedInUser');
     $countries = countries();    
     $keys = array_keys($countries);
     $receptionists=User::all();
     
-    return view('receptionists.edit',['receptionist'=> User::findOrFail($id),
+    return view('admin.receptionists.edit',['receptionist'=> User::findOrFail($id),
     'receptionists'=>$receptionists,
     'countries'=>$countries,
     'keys'=>$keys,
+    'clientData' =>$clientData,
     ]);
 }
 public function update(Request  $request,$id)
@@ -155,13 +166,13 @@ public function update(Request  $request,$id)
         'name' => $request->name,
         'type' => "3",
         'email' => $request->email,
-        'password' => Hash::make($request->password),
+        'password' => $request->password,
         'image' => $destinationPath,
         'mobile' => $request->mobile,
         'country' => $request->country,
         'gender' => $request->gender
     ]);
-    return redirect(route('receptionists'));
+    return redirect(route('adminreceptionists'));
 }
 }
  

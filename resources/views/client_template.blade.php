@@ -47,6 +47,13 @@
             </span>
           </a>
         </li>
+        <li>
+          <a href="/logout">
+          <span>Logout</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
     </section>
     
     <!-- /.sidebar -->

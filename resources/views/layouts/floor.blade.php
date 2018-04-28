@@ -49,7 +49,7 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b></span>
+      <span class="logo-lg"><b>Manager</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -70,29 +70,29 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p>Manager</p>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="{{ route('adminmanagers') }}">
-          <span>Manage Managers</span>
+          <a href="{{ route('managefloor') }}">
+          <span>Manage Receptionist</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('adminreceptionists') }}">
-          <span>Manage Receptionists</span>
+          <a href="{{ route('managefloor') }}">
+          <span>Manage Floor</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="{{ route('adminclients') }}">
-          <span>Manage Clients</span>
+          <a href="{{ route('managefloor') }}">
+          <span>Manage Room</span>
             <span class="pull-right-container">
             </span>
           </a>
@@ -105,7 +105,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        @yield('manager')
+        @yield('floor')
     </section>
 
     <!-- Main content -->
@@ -160,3 +160,4 @@
 @stack('scripts')
 </body>
 </html>
+ 
