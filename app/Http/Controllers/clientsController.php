@@ -88,11 +88,13 @@ class clientsController extends Controller
             'email' => $request->email,
             'password' => md5($request->password),
             'image' => $destinationPath,
-            'mobile' => $request->mobile,
-            'country' => $request->country,
+            'phone' => $request->mobile,
+            'countries' => $request->country,
             'gender' => $request->gender
         ]);
-        
+
+        var_dump($request->country);
+        exit;
         $userSession=[
             'name'=>$request->name,
             'type'=>'3',
@@ -188,7 +190,7 @@ public function update(Request  $request,$id)
         'password' => Hash::make($request->password),
         'image' => $destinationPath,
         'mobile' => $request->mobile,
-        'country' => $request->country,
+        'countries' => $request->country,
         'gender' => $request->gender
     ]);
     return redirect(route('receptionists'));
@@ -196,15 +198,35 @@ public function update(Request  $request,$id)
 
 public function getGenderStat()
 {
-    $allFemaleClients=Client::where('gender','female')->get();
-    $allmaleClients=Client::where('gender','male')->get();
+    $allFemaleClients=Client::where('gender','female')->get()->count();
+    $allmaleClients=Client::where('gender','male')->get()->count();
     $genderStatJson=json_encode([
-        'malesNo'=>count($allmaleClients),
-        'femalesNo'=>count($allFemaleClients)
+        'malesNo'=>$allmaleClients,
+        'femalesNo'=>$allFemaleClients
     ]); 
     return $genderStatJson;
     
 }
+
+public function getContriesStat()
+{
+    $allContries=Client::distinct()->get(['countries']);
+    $allContriesAndNo=[];
+    foreach($allContries as $country)
+    {
+        $countryName=$country->countries;
+        if(!is_null($countryName))
+        {
+            $allRecordsInCountry=Client::where('countries',$countryName)->get()->count();
+            array_push($allContriesAndNo,[
+                $countryName => $allRecordsInCountry
+            ]);
+        }
+    }
+    return json_encode($allContriesAndNo);
+}
+
+
 
 }
  

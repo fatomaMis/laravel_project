@@ -65,4 +65,5 @@ Route::delete('clients/{id}','clientsController@destroy');
 
 //statistics
 Route::get('/stat','managersController@stat')->name('managers.stat');
-Route::get('api/clients/getGenderStat','clientsController@getGenderStat')->name('clients.show');
+Route::get('api/clients/getGenderStat','clientsController@getGenderStat');
+Route::get('api/clients/getContriesStat','clientsController@getContriesStat');

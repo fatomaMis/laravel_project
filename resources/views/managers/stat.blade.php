@@ -104,17 +104,20 @@
 
 
   // Start Reservations Pie Chart
-      function drawPieChartOfReservs() {
-      var statReservsObj=getStatReservsObj();
-      var tableData=[
-          ['National', 'Numbers'],
-          ['Egypt',     statReservsObj.egypt],
-          ['NonEgypt',      statReservsObj.nonEgypt],
-        ];
+      async function drawPieChartOfReservs() {
+      var statReservsObj=await getStatReservsObj();
+      var contriesNames = Object.keys(statReservsObj);
+      var tableData=[['National', 'Numbers']];
+      statReservsObj.forEach(function(element){
+        var contryName=Object.keys(element)[0];
+        let result = Object.keys(element)
+        .map(field => [contryName, element[field.replace("field", "value")]]);
+        console.log(result[0]);
+        tableData.push(result[0]);
+      })
       var data = google.visualization.arrayToDataTable(tableData);
-
       var options = {
-        title: 'Gender Statistics'
+        title: 'Contries Statistics'
       };
 
       var chart = new google.visualization.PieChart(document.getElementById('piechartOfContries'));
@@ -122,14 +125,15 @@
       chart.draw(data, options);
     }
 
-    function getStatReservsObj()
+    async function getStatReservsObj()
     {
+      var statReservsObj={}
+      await $.get("/index.php/api/clients/getContriesStat", function(data){
+        statReservsObj=JSON.parse(data);
+      });
       ///make ajax request here
 
-      return {
-        egypt:8,
-        nonEgypt:20
-      }
+      return statReservsObj;
     }
   // End Reservations Pie Chart
 
