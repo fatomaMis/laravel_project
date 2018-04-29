@@ -49,7 +49,7 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b></span>
+      <span class="logo-lg"><b>Manager</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -70,7 +70,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p>Manager</p>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->

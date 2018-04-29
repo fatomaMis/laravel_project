@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Hash;
+use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Yajra\Datatables\Datatables;
@@ -69,7 +70,7 @@ class managersController extends Controller
             'name' => $request->name,
             'type' => "2",
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'image' => $destinationPath,
             'mobile' => $request->mobile,
             'country' => $request->country,
@@ -115,8 +116,16 @@ public function edit($id){
     'keys'=>$keys,
     ]);
 }
-public function update(StoreBlogUser $request,$id)
+public function update(Request  $request,$id)
 {
+    $this->validate(request(), [
+        'id' => 'required',
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+        'image' => 'image|mimes:jpg,jpeg'
+    ]);
+    
     if($request->image == null){
         $destinationPath = 'img/avatar.jpg';
     }
@@ -133,7 +142,7 @@ public function update(StoreBlogUser $request,$id)
         'name' => $request->name,
         'type' => "2",
         'email' => $request->email,
-        'password' => $request->password,
+        'password' => Hash::make($request->password),
         'image' => $destinationPath,
         'mobile' => $request->mobile,
         'country' => $request->country,

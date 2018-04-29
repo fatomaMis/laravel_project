@@ -35,7 +35,7 @@
             </tr>
             <tr>
             <td>Image</td>
-            <td><img src="../../{{$manager->image}}" style="height:80px"><input type="file" class="form-control" name="image" id="image"></td>
+            <td><img src="../../{{$manager->image}}" style="height:80px"><input type="file"  class="form-control" name="image" id="image"></td>
             </tr> 
             <tr>
             <tr>

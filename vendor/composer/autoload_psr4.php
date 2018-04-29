@@ -48,6 +48,8 @@ return array(
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Cron\\' => array($vendorDir . '/dragonmantank/cron-expression/src/Cron'),
     'Collective\\Html\\' => array($vendorDir . '/laravelcollective/html/src'),
+    'Cog\\Laravel\\Ban\\' => array($vendorDir . '/cybercog/laravel-ban/src'),
+    'Cog\\Contracts\\Ban\\' => array($vendorDir . '/cybercog/laravel-ban/contracts'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Appzcoder\\CrudGenerator\\' => array($vendorDir . '/appzcoder/crud-generator/src'),
     'App\\' => array($baseDir . '/app'),

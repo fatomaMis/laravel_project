@@ -41,7 +41,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('receptionist') }}">
           <span>Manage Receptionists</span>
             <span class="pull-right-container">
             </span>

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('receptionist_client')->nullable(); 
             $table->string('image')->default('img/avatar.jpg');
             $table->string('mobile')->nullable();
-            $table->string('country');
+            $table->string('country')->nullable();
             $table->string('gender');
             $table->integer('accompany_num')->nullable();
             $table->integer('room_num')->nullable();

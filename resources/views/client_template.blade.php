@@ -27,6 +27,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
+        
           <p>Client</p>
         </div>
       </div>
@@ -55,12 +56,18 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+
 @section('content')
 
 <h1>
         Client
         <small>Control panel</small>
       </h1>
+      @if( auth()->check() )
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ auth()->user()->name }}</a>
+                </li>
+            @endif
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Client</li>

@@ -63,6 +63,80 @@
         ]
     },
     {
+        "name": "cybercog/laravel-ban",
+        "version": "3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cybercog/laravel-ban.git",
+            "reference": "95547dfa7771be617d88ee9f6a6cb894d8d48c16"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cybercog/laravel-ban/zipball/95547dfa7771be617d88ee9f6a6cb894d8d48c16",
+            "reference": "95547dfa7771be617d88ee9f6a6cb894d8d48c16",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "~5.1.20|~5.2|~5.3|~5.4|~5.5|~5.6",
+            "illuminate/events": "~5.1.20|~5.2|~5.3|~5.4|~5.5|~5.6",
+            "illuminate/support": "~5.1.20|~5.2|~5.3|~5.4|~5.5|~5.6",
+            "php": "^5.6|^7.0"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.10",
+            "mockery/mockery": "^0.9.8",
+            "orchestra/database": "~3.4.0|~3.5.0|~3.6.0",
+            "orchestra/testbench": "~3.4.0|~3.5.0|~3.6.0",
+            "phpunit/phpunit": "^5.7|^6.0|^7.0"
+        },
+        "time": "2018-02-08T05:43:05+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Cog\\Laravel\\Ban\\Providers\\BanServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Cog\\Contracts\\Ban\\": "contracts/",
+                "Cog\\Laravel\\Ban\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Anton Komarev",
+                "email": "a.komarev@cybercog.su",
+                "homepage": "http://ell.folio.su",
+                "role": "Developer"
+            }
+        ],
+        "description": "Laravel Ban simplify blocking and banning Eloquent models.",
+        "homepage": "https://github.com/cybercog/laravel-ban",
+        "keywords": [
+            "Justice",
+            "arrest",
+            "ban",
+            "block",
+            "cog",
+            "cybercog",
+            "eloquent",
+            "forbid",
+            "jail",
+            "laravel",
+            "restrict",
+            "trait",
+            "user"
+        ]
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "0.1",
         "version_normalized": "0.1.0.0",
@@ -3223,17 +3297,17 @@
     },
     {
         "name": "spatie/laravel-permission",
-        "version": "2.11.0",
-        "version_normalized": "2.11.0.0",
+        "version": "2.12.1",
+        "version_normalized": "2.12.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/spatie/laravel-permission.git",
-            "reference": "cc98e4dca988af6fb546e7e95248481713782cbe"
+            "reference": "c352d83ecb5efb2d68169a1de7b7e263135ad807"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/cc98e4dca988af6fb546e7e95248481713782cbe",
-            "reference": "cc98e4dca988af6fb546e7e95248481713782cbe",
+            "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/c352d83ecb5efb2d68169a1de7b7e263135ad807",
+            "reference": "c352d83ecb5efb2d68169a1de7b7e263135ad807",
             "shasum": ""
         },
         "require": {
@@ -3247,7 +3321,7 @@
             "orchestra/testbench": "~3.3.0|~3.4.2|^3.5.0",
             "phpunit/phpunit": "^5.7|6.2|^7.0"
         },
-        "time": "2018-04-16T15:09:56+00:00",
+        "time": "2018-04-23T19:06:39+00:00",
         "type": "library",
         "extra": {
             "laravel": {
