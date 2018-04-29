@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Yajra\Datatables\Datatables;
@@ -22,6 +22,7 @@ class managersController extends Controller
      */
     public function getIndex()
     { 
+        
         $clientData=Session::get('loggedInUser');
         if($clientData == null){
             return view('login');
@@ -87,7 +88,8 @@ class managersController extends Controller
             'image' => $destinationPath,
             'mobile' => $request->mobile,
             'country' => $request->country,
-            'gender' => $request->gender
+            'gender' => $request->gender,
+            'manage_receptionist' => $request->manage_receptionist
         ]);
        return redirect(route('adminmanagers.store')); 
 }
@@ -142,8 +144,15 @@ public function edit($id){
     'clientData' =>$clientData,
     ]);
 }
-public function update(StoreBlogUser $request,$id)
+public function update(Request $request,$id)
 {
+    $this->validate(request(), [
+        'id' => 'required',
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+        'image' => 'image|mimes:jpg,jpeg'
+    ]);
     if($request->image == null){
         $destinationPath = 'img/avatar.jpg';
     }
@@ -164,7 +173,8 @@ public function update(StoreBlogUser $request,$id)
         'image' => $destinationPath,
         'mobile' => $request->mobile,
         'country' => $request->country,
-        'gender' => $request->gender
+        'gender' => $request->gender,
+        'manage_receptionist' => $request->manage_receptionist
     ]);
     return redirect(route('adminmanagers'));
 }

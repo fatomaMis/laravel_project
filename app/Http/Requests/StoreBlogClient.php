@@ -26,7 +26,7 @@ class StoreBlogClient extends FormRequest
         return [
             'password' => 'required|min:6',
             'name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required|unique:clients,email',
             'image' => 'image|mimes:jpg,jpeg'
             ];
     }

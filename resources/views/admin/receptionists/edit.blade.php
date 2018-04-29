@@ -34,6 +34,10 @@
             <td><input type="password" name="password" value="{{$receptionist->password}}"></td>
             </tr>
             <tr>
+            <td>Client</td>
+            <td><input type="receptionist_client" name="receptionist_client" value="{{$receptionist->receptionist_client}}"></td>
+            </tr>
+            <tr>
             <td>Image</td>
             <td><img src="../../../{{$receptionist->image}}" style="height:80px">
             <input type="file" value="{{$receptionist->image}}" class="form-control" name="image" id="image"></td>

@@ -47,7 +47,9 @@ public function loginUser(Request  $request)
         'gender'=>$client->gender,
     ];
     $request->session()->put('loggedInUser', $clientSession);
-    return redirect(route('client.index')); 
+    $clientData=Session::get('loggedInUser');
+    return view('clients.myhome',['clientData' =>$clientData,
+    ]);
     }
     elseif($user){
  

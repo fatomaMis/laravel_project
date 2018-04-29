@@ -1,6 +1,6 @@
-@extends('layouts.manager')
+@extends('layouts.floor')
 
-@section('manager')
+@section('floor')
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -21,7 +21,6 @@
             <td><input type="name" name="name"></td>
             </tr>
             <tr>
-            
        <input type="hidden" name="id" value="{{$clientData['id']}}">
 
     </table>

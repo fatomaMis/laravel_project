@@ -93,9 +93,6 @@ class clientsController extends Controller
         return Datatables::of($clients)
         ->addColumn('action', function ($clients) {
         })
-        ->addColumn('receptionist', function ($clients) {
-            return $clients->receptionist;
-        })
         ->make(true);
     }
 

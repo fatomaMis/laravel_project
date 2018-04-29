@@ -88,9 +88,12 @@
     <table class="table table-bordered" id="managers-table">
         <thead>
             <tr>
+           
                 <th>Number</th>
                 <th>Capacity</th>
                 <th>Price</th>
+                <th>Floor Name</th>
+                <th>Action</th>
             </tr>
         </thead>
     </table>
@@ -100,7 +103,7 @@
 <script>
 
 $(function() {
-  var i = 0;
+
     $('#managers-table').DataTable({
         processing: true,
         serverSide: true,
@@ -109,14 +112,16 @@ $(function() {
             { data: 'number', name: 'number' },
             { data: 'capacity', name: 'capacity'},
             { data: 'price', name: 'price'},
+            { data: 'floorname', name: 'floorname'},
             {data: 'action', name: 'action', orderable: false, searchable: false,
                 render: function (data, type, row) {
                   var id = row['id'];
-                 
+                  var num = {{$num}};
+                  var sid = id-num;
                   var manager_room =  '{{$clientData['id']}}';
                   var rooms = '{{$room}}'
                   room = JSON.parse(rooms.replace(/&quot;/g,'"'));
-                  if (room[i]['manager_id'] == manager_room){
+                  if (room[sid] && room[sid]['manager_id'] == manager_room){
                   var url = '{{ route("manageroom.show", ":id") }}';
                   url = url.replace(':id', row['id']);
 
@@ -126,15 +131,12 @@ $(function() {
                     var linkView='<a href = "'+url+'" class="editor_preview btn btn-success btn-sm glyphicon glyphicon-th-list" data-id="' + row["id"] + '">VIEW</a>';
                     var linkEdit='<a href= "'+editurl+'" class="btn btn-warning btn-sm glyphicon glyphicon-edit" data-id="' + row['id'] + '">EDIT</a>';
                     var linkDelete='<button onclick="myFunction('+row['id']+')" class="deleteProduct btn btn-danger btn-sm glyphicon glyphicon-trash" data-id="' + row["id"] + '">DELETE</button>';
-                    
                     return  linkView +' '+ linkEdit +' '+ linkDelete;
                }
                else{
                 return null;
                }
-               i++;
                 }
-
             },
         ]
     });
@@ -157,7 +159,6 @@ function myFunction(id){
         },
         success: function (response)
         {
-    
           var table = $('#managers-table').DataTable();
           table.row( $(this).parents('tr') ).remove().draw();
             console.log(response);

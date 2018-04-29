@@ -100,7 +100,6 @@
 <script>
 
 $(function() {
-  var i = 0;
     $('#managers-table').DataTable({
         processing: true,
         serverSide: true,
@@ -111,11 +110,12 @@ $(function() {
             {data: 'action', name: 'action', orderable: false, searchable: false,
                 render: function (data, type, row) {
                   var id = row['id'];
-                 
+                  var num = {{$num}};
+                  var sid = id-num;
                   var manager_floor =  '{{$clientData['id']}}';
                   var floors = '{{$floor}}'
                   floor = JSON.parse(floors.replace(/&quot;/g,'"'));
-if (floor[i]['manager_id'] == manager_floor){
+                  if (floor[sid] && floor[sid]['manager_id'] == manager_floor){
                   var url = '{{ route("managefloor.show", ":id") }}';
                   url = url.replace(':id', row['id']);
 
@@ -126,12 +126,12 @@ if (floor[i]['manager_id'] == manager_floor){
                     var linkEdit='<a href= "'+editurl+'" class="btn btn-warning btn-sm glyphicon glyphicon-edit" data-id="' + row['id'] + '">EDIT</a>';
                     var linkDelete='<button onclick="myFunction('+row['id']+')" class="deleteProduct btn btn-danger btn-sm glyphicon glyphicon-trash" data-id="' + row["id"] + '">DELETE</button>';
                     
+
                     return  linkView +' '+ linkEdit +' '+ linkDelete;
                }
                else{
                 return null;
                }
-               i++;
                 }
 
             },

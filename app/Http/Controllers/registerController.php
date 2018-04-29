@@ -34,12 +34,8 @@ class RegisterController extends Controller
             $destinationPath = 'img/avatar.jpg';
         }
         else{
-        $file = $request->file('avatar_image');
-        $fileName = $file->getClientOriginalName();
-        $extension =  pathinfo($fileName);
-        $fileName = $request->id.'.'.$extension["extension"];
-        $destinationPath = 'img/'.$fileName;
-        $file->move(public_path().'/img/',$fileName);
+        $file = $request->avatar_image;
+        $destinationPath = 'img/'.$file;
         }
         Client::create([
             'name' => $request->name,
@@ -61,7 +57,9 @@ class RegisterController extends Controller
         ];
 
        $request->session()->put('loggedInUser', $userSession);
-       return redirect(route('register.store')); 
+       $clientData=Session::get('loggedInUser');
+       return view('clients.myhome', ['clientData' =>$clientData,
+       ]);  
 }
 }
  

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 // use App\Http\Requests\Request;
-use Illuminate\Http\Request\StoreBlogClient;
+use App\Http\Requests\StoreBlogClient;
 use App\Client;
+use Illuminate\Http\Request;
 use App\Room;
-
+use Session;
 class ClientsController extends Controller
 {
     public function edit($id){
-        $client=Client::find('1');
+        $clientData=Session::get('loggedInUser');
+        
+        $client=Client::where('email',$clientData['email']) -> first();
         if($client){
         return view('clients.editprofile',[
             'client'=>$client   
@@ -20,14 +23,18 @@ class ClientsController extends Controller
         }
     }
 
-    public function update(StoreBlogClient $request , $id){
+    public function update(Request $request , $id){
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
         Client::where('id',1)->update([
             'name'=>$request->name,
             'email'=>$request->email,
         ]);
         return redirect(route('allroom'));
     }
-
     public function index(){
         return view('reception.recephome');
     }
@@ -46,8 +53,4 @@ class ClientsController extends Controller
             'clients'=>$clients
         ]);    
     }
-
-
-
-
 }

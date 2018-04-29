@@ -77,7 +77,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="{{ route('managefloor') }}">
+          <a href="{{ route('manageroom') }}">
           <span>Manage Receptionist</span>
             <span class="pull-right-container">
             </span>
@@ -112,7 +112,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        @yield('floor')
+        @yield('room')
     </section>
 
     <!-- Main content -->
@@ -167,4 +167,5 @@
 @stack('scripts')
 </body>
 </html>
+ 
  

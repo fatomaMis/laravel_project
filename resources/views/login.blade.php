@@ -1,7 +1,6 @@
 @extends('layouts.app')
  
 @section('content')  
-    
     <form method="POST" action="/login/loginUser" style="padding-left:100px;width:900px">
         {{ csrf_field() }}
         <h2>Log In</h2>

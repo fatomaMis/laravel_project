@@ -33,6 +33,10 @@
             <td><input type="password" name="password"></td>
             </tr>
             <tr>
+            <td>Client</td>
+            <td><input type="receptionist_client" name="receptionist_client"></td>
+            </tr>
+            <tr>
             <td>Image</td>
             <td><input type="file" class="form-control" name="image" id="image"></td>
             </tr> 

@@ -96,7 +96,6 @@
                 <th>Gender</th>
                 <th>Created At</th>
                 <th>Updated At</th>
-                <th>Managed By</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -149,7 +148,6 @@ $(function() {
                     return newdate;
                  }
              },
-             { data: 'receptionist', name: 'receptionist'},
             {data: 'action', name: 'action', orderable: false, searchable: false,
                 render: function (data, type, row) {
                   

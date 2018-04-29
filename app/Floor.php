@@ -15,7 +15,7 @@ class Floor extends Model
      * @var array
      */
     protected $fillable = [
-       'name','number','manager_id'
+       'name','number','manager_id','floor_id','price'
     ];
 
     /**

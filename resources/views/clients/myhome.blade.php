@@ -1,4 +1,4 @@
-<h1>Client Page</h1>
+<h1>Hello Page</h1>
 <br>
 <br>
   <a href="{{route('allroom')}}" class="btn btn-info btn-sm active" role="button">​ My Recervation</a>

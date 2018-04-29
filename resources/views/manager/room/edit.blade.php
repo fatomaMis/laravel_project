@@ -1,6 +1,6 @@
-@extends('layouts.manager')
+@extends('layouts.room')
 
-@section('manager')
+@section('room')
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -14,23 +14,50 @@
 <div class="container">
 <div class="table-wrapper"> 
 
-<form class="form-horizontal" method="post" action="{{route('managefloor.update',$floor->id)}}" enctype="multipart/form-data">
+<form class="form-horizontal" method="post" action="{{route('manageroom.update',$room->id)}}" enctype="multipart/form-data">
 {{csrf_field()}}
 <table class="table table-bordered" id="managers-table">
 
-            <td>Name</td>
-            <td><input type="text" name="name" value="{{$floor->name}}"></td>
+            <td>Room Number</td>
+            <td><input type="number" name="num" value="{{$room->room_number}}"></td>
             </tr>
             <tr>
-            <td>Number</td>
-            <td><input type="number" name="number" value="{{$floor->number}}" ></td>
+            <td>Capacity</td>
+            <td><input type="text" name="capacity" value="{{$room->capacity}}" ></td>
             </tr>
+            <tr>
+            <td>Price</td>
+            <td><input type="text" name="price" value="{{$room->price}}" ></td>
+            </tr>
+            <tr>
+            <td>Floor Id</td>
+            <td>
+            @for($i=0;$i<count($floors);$i++)
+       <input type="checkbox" name="floorid" value="{{$floors[$i]->id}}" id={{$i}}/>{{$floors[$i]->id}}
+       <br>
+       @endfor
+       </td>
+            </tr>
+            <tr>
+            <td>
+Reserved
+      </td>
 
+      <td>
+      <input type="checkbox" name="reserved" value="0"/>no
+      <br>
+      <input type="checkbox" name="reserved" value="1" checked/>yes
+      </td>
+      </tr>
+      <input type="hidden" name="id" value="{{$clientData['id']}}">
     </table>
 <input type="submit" value="Update" class="btn btn-primary">
 </form>
 </div>
 </div>
+<script>
+document.getElementById('0/').setAttribute("checked", "checked");
+</script>
 @endsection
 
 

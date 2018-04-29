@@ -23,17 +23,39 @@ class floorController extends Controller
      */
     public function getIndex()
     { 
+        $floors = Floor::all();
+        $i=0;
+        foreach ($floors as $floor){
+           $array[$i]=$floor;
+            $i++;
+        }
+        for ($i=0;$i<count($floors);$i++){
+            Floor::where('id',$array[$i]->id)->update(['id'=>($i+1)]);
+        }
+        
         $clientData=Session::get('loggedInUser');
         if($clientData == null){
             return view('login');
         }
         else if($clientData['type']==2){
         $floors =  Floor::all();
+        $num = Floor::all()->first();
+        if($num){
+        $num = $num->id;
         return view('manager.floor.index',[
             'floor' => $floors,
             'clientData' =>$clientData,
+            'num' => $num
         ]);
         }
+        else{
+            return view('manager.floor.index',[
+                'floor' => $floors,
+                'clientData' =>$clientData,
+                'num' => '1'
+            ]);
+        }
+    }
         else{
             return view('login');
         }
@@ -73,6 +95,15 @@ class floorController extends Controller
 public function destroy($id)
 {
     Floor::destroy($id);
+    $floors = Floor::all();
+    $i=0;
+    foreach ($floors as $floor){
+       $array[$i]=$floor;
+        $i++;
+    }
+    for ($i=0;$i<count($floors);$i++){
+        Floor::where('id',$array[$i]->id)->update(['id'=>($i+1)]);
+    }
     return response()->json([
         'success' => 'Record has been deleted successfully!'
     ]);

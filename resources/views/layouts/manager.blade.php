@@ -47,7 +47,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Admin</b></span>
     </a>
@@ -56,7 +56,7 @@
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
+      </a>admin
       </nav>
 
   </header>
@@ -93,6 +93,13 @@
         <li>
           <a href="{{ route('adminclients') }}">
           <span>Manage Clients</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="/">
+          <span>Logout</span>
             <span class="pull-right-container">
             </span>
           </a>

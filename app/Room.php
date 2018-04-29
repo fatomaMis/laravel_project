@@ -9,12 +9,11 @@ class Room extends Model
     use Notifiable;
     //
     protected $fillable = [
-        'name', 'email', 'password','avatar_image','gender','countries'
+        'room_number', 'number', 'capacity','price','manager_id','floor_id','is_admin'
     ];
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
     public function floor()
     {
         return $this->belongsTo(Floor::class);

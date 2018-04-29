@@ -1,6 +1,6 @@
-@extends('layouts.manager')
+@extends('layouts.floor')
 
-@section('manager')
+@section('floor')
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

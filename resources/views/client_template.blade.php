@@ -4,7 +4,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Client</b></span>
     </a>
@@ -48,7 +48,7 @@
           </a>
         </li>
         <li>
-          <a href="/logout">
+          <a href="/">
           <span>Logout</span>
             <span class="pull-right-container">
             </span>

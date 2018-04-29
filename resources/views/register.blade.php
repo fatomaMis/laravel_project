@@ -2,8 +2,15 @@
 @extends('layouts.app')
  
  @section('content')
- 
-     
+ @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
      
      <form method="post" action="/register" style="padding-left:100px;width:900px">
          {{ csrf_field() }}

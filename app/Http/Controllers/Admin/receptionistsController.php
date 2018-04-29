@@ -52,9 +52,6 @@ class receptionistsController extends Controller
         return Datatables::of($receptionists)
         ->addColumn('action', function ($receptionists) {
         })
-        ->addColumn('manager', function ($id) {
-            return $id->manage_receptionist;
-        })
         ->make(true);
     }
 
@@ -95,7 +92,8 @@ class receptionistsController extends Controller
             'image' => $destinationPath,
             'mobile' => $request->mobile,
             'country' => $request->country,
-            'gender' => $request->gender
+            'gender' => $request->gender,
+            'receptionist_client' => $request->receptionist_client
         ]);
        return redirect(route('adminreceptionists.store')); 
 }
@@ -170,7 +168,8 @@ public function update(Request  $request,$id)
         'image' => $destinationPath,
         'mobile' => $request->mobile,
         'country' => $request->country,
-        'gender' => $request->gender
+        'gender' => $request->gender,
+        'receptionist_client' => $request->receptionist_client
     ]);
     return redirect(route('adminreceptionists'));
 }
