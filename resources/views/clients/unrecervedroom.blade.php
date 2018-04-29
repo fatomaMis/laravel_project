@@ -28,7 +28,7 @@ table, th, td {
   <tr>
     <td>{{$room->room_number}}</td>
     <td>{{$room->capacity}}</td>
-    <td>{{$room->price%100}}$</td>
+    <td>{{$room->price/100}}$</td>
     <td>
     <a href="{{route('showroom',$room->id)}}" class="btn btn-info btn-sm active" role="button">​Make Reservation</a>
     </td>

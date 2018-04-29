@@ -24,11 +24,10 @@ class StoreBlogRoom extends FormRequest
     public function rules()
     {
         return [
-            'number' => 'unique|min:4',
-            'capacity' => 'required|integer',
-            'price' => 'required|numeric',
-            ];
+            'number'=>'required'
+        ];
     }
+
     public function messages()
     {
          return [
@@ -36,4 +35,3 @@ class StoreBlogRoom extends FormRequest
          ];
     }
 }
- 

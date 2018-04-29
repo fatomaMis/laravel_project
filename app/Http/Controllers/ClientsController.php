@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 // use App\Http\Requests\Request;
-use Illuminate\Http\Request\StoreBlogClient;
+use App\Http\Requests\StoreBlogClient;
+// use App\Http\Requests\StoreBlogRoom;
 use App\Client;
 use App\Room;
 
@@ -10,14 +11,9 @@ class ClientsController extends Controller
 {
     public function edit($id){
         $client=Client::find('1');
-        if($client){
         return view('clients.editprofile',[
             'client'=>$client   
         ]);
-        }
-        else{
-            return view('clients.myhome');
-        }
     }
 
     public function update(StoreBlogClient $request , $id){
@@ -46,6 +42,8 @@ class ClientsController extends Controller
             'clients'=>$clients
         ]);    
     }
+
+   
 
 
 

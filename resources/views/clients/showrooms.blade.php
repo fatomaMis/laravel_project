@@ -8,21 +8,23 @@
     </div>
 @endif
 
-<form method="post" action="{{route('updatenumber',$room->id)}}">
+<form method="post" action='/allroom'>
+{{csrf_field()}}
 Number Of Accompany:-
 <br>
 <br>
-<input type="text"  id="number" name="number of accompany" >
+<input type="text"   name="number" >
 <br>
 <br>
+<p></p>
 
-<button onclick="checkfunc()" >Submit Your Recervation </button>
+<button onclick="checkfunc()" type="submit">Submit Your Recervation </button>
 </form>
 
-<!-- <script>
+<script>
 function checkfunc(){
 var x = document.getElementById("number").value;
 if($rooom->capacity < x)
 alert ('You can receved This Room ');
 }
-</script> -->
+</script>

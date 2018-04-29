@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\User;
+use App\Client;
 use Yajra\Datatables\Datatables;
 
 class DatatablesController extends Controller
@@ -15,7 +15,9 @@ class DatatablesController extends Controller
      */
     public function getIndex()
     {
-        return view('login');
+        $client=Client::find('1');
+        // dd($user);
+        return view('client_template',['client'=> $client]);
     }
 
     /**

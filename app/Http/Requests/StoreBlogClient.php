@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Client;
 
 class StoreBlogClient extends FormRequest
 {
@@ -24,12 +25,11 @@ class StoreBlogClient extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|min:6',
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'image' => 'image|mimes:jpg,jpeg'
-            ];
+            'name'=>'required',
+            'email'=>'required',
+        ];
     }
+
     public function messages()
     {
          return [
@@ -38,4 +38,3 @@ class StoreBlogClient extends FormRequest
          ];
     }
 }
- 

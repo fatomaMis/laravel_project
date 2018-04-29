@@ -26,7 +26,7 @@ table, th, td {
   <tr>
   <td>{{$reservation->room_id}}</td>
   <td>{{$reservation->accompany_number}}</td>
-  <td>{{$reservation->price}}</td>
+  <td>{{$reservation->price/100}}$</td>
 
   </tr>  
 @endforeach 

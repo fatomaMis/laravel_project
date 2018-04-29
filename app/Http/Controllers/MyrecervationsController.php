@@ -20,4 +20,24 @@ class MyrecervationsController extends Controller
         ]);
     }
 
+    public function store(Request $request,$room_id)
+    {
+        $room=Room::find($room_id);
+            Validator::make($request->all(), [
+                
+                'accompany_number' => 'required|numeric|max:'.$room->capacity,
+            ], [
+                'max' => "The Number Of Companions Must Be less Than Or Equal $room->capacity",
+            ])->validate();
+            Reservation::create([
+                'room_id' =>$room_id,
+                'client_id' =>$client_id,
+                 'price' =>$paid_price,
+                'accompany_number'=>$request->accompany_number,
+               ]);
+               $room->is_reserved=1;
+               $room->save();
+            return redirect('client');
+    }
+
 }
